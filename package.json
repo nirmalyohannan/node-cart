@@ -1,0 +1,20 @@
+{
+  "name": "node-cart",
+  "version": "0.0.1",
+  "description": "A modular, scalable, and reusable eCommerce backend template built with Node.js and Express.js",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.mjs",
+    "dev": "nodemon index.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "type": "module"
+}
