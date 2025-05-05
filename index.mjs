@@ -1,7 +1,7 @@
-const express = require('express');
+import { express, json } from 'express';
 const app = express();
 
-app.use(express.json());
+app.use(json());
 
 app.get('/', (req, res) => {
     res.status(200).send({ success: true, message: 'Welcome to the NodeCart API!' });
