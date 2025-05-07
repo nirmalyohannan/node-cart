@@ -6,6 +6,8 @@ const router = express.Router();
 
 // @route   POST /api/users
 // @desc    Add a new user
+// @example URL: http://localhost:3000/api/users
+// @example Body: { "name": "John Doe", "mobile": "1234567890" }
 router.post('/', async (req, res) => {
     const { name, mobile } = req.body;
     const regex = /^\d{10}$/;

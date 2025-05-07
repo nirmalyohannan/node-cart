@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeCart - E-commerce API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .endpoint {
+            background-color: #e8f4f8;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>NodeCart API</h1>
+
+    <div class="container">
+        <h2>Welcome to NodeCart API</h2>
+        <p>A robust e-commerce backend API built with Node.js, Express, and MongoDB.</p>
+
+        <h3>Features</h3>
+        <ul>
+            <li>User authentication and authorization</li>
+            <li>Product management</li>
+            <li>Shopping cart functionality</li>
+            <li>Order processing</li>
+            <li>RESTful API design</li>
+        </ul>
+
+        <h3>Getting Started</h3>
+        <p>To get started with the API, you can make requests to the following endpoints:</p>
+
+        <div class="endpoint">
+            <strong>GET /api/users</strong> - Get all users
+        </div>
+
+        <div class="endpoint">
+            <strong>POST /api/users/register</strong> - Register a new user
+        </div>
+
+        <div class="endpoint">
+            <strong>POST /api/users/login</strong> - User login
+        </div>
+
+        <h3>Installation</h3>
+        <ol>
+            <li>Clone the repository</li>
+            <li>Run <code>npm install</code> to install dependencies</li>
+            <li>Create a <code>.env</code> file and set up your environment variables</li>
+            <li>Run <code>node index.mjs</code> to start the server</li>
+        </ol>
+
+        <h3>Environment Variables</h3>
+        <p>Create a <code>.env</code> file in the root directory with the following variables:</p>
+        <pre>
+PORT=3000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+        </pre>
+    </div>
+
+    <footer style="margin-top: 30px; text-align: center; color: #7f8c8d; font-size: 0.9em;">
+        <p>© 2025 NodeCart API. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
