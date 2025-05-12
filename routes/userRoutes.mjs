@@ -50,15 +50,15 @@ router.put('/', auth, updateUserValidation, async (req, res) => {
 
     try {
         const userId = req.user.id;
-        const { name, email, password, phone, address } = req.body;
+        const { name, password, phone, address, role } = req.body;
         const updateData = {};
 
         // Only update allowed fields that are provided
         if (name) updateData.name = name;
-        if (email) updateData.email = email;
         if (password) updateData.password = password;
         if (phone) updateData.phone = phone;
         if (address) updateData.address = address;
+        if (role) updateData.role = role;
 
         const updatedUser = await User.findByIdAndUpdate(
             userId,

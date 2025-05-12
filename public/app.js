@@ -166,9 +166,9 @@ async function handleProfileUpdate(event) {
             },
             body: JSON.stringify({
                 name: formData.get('name'),
-                email: formData.get('email'),
                 phone: formData.get('phone'),
-                address: formData.get('address')
+                address: formData.get('address'),
+                role: formData.get('role')
             })
         });
 
