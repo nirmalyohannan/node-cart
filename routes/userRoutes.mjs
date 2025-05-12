@@ -2,7 +2,7 @@
 import User from '../models/user.mjs';
 import express from 'express';
 import { validationResult } from 'express-validator';
-import { updateUserValidation, deleteUserValidation, getUserByIdValidation } from '../validators/userValidator.mjs';
+import { updateUserValidation } from '../validators/userValidator.mjs';
 import auth from '../middleware/auth.mjs';
 
 const router = express.Router();

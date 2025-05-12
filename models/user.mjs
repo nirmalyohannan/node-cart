@@ -1,8 +1,9 @@
 
-import mongoose from 'mongoose';
+import { mongoose, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     name: { type: String, required: true }, // User's full name
     email: { type: String, required: true, unique: true }, // User's email address
     password: { type: String, required: true }, // User's password (hashed for security)
