@@ -4,97 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NodeCart - E-commerce API</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-
-        .container {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-
-        code {
-            background-color: #f0f0f0;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-
-        .endpoint {
-            background-color: #e8f4f8;
-            padding: 10px;
-            margin: 10px 0;
-            border-left: 4px solid #3498db;
-        }
-    </style>
+    <meta name="description" content="NodeCart - Your Modern E-commerce Platform">
+    <title>NodeCart - E-commerce Platform</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>NodeCart API</h1>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-content">
+            <a href="/" class="nav-brand" aria-label="NodeCart Home">NodeCart</a>
+            <div class="nav-links" id="navLinks" aria-label="Navigation menu">
+                <!-- Navigation links will be dynamically updated based on auth status -->
+            </div>
+        </div>
+    </nav>
 
-    <div class="container">
-        <h2>Welcome to NodeCart API</h2>
-        <p>A robust e-commerce backend API built with Node.js, Express, and MongoDB.</p>
+    <main class="container" role="main">
+        <div id="errorMessage" class="error-message hidden" role="alert" aria-live="polite"></div>
+        <div id="successMessage" class="success-message hidden" role="alert" aria-live="polite"></div>
 
-        <h3>Features</h3>
-        <ul>
-            <li>User authentication and authorization</li>
-            <li>Product management</li>
-            <li>Shopping cart functionality</li>
-            <li>Order processing</li>
-            <li>RESTful API design</li>
-        </ul>
+        <!-- Authentication Section -->
+        <div id="authSection" class="auth-container">
+            <!-- Login Form -->
+            <form id="loginForm" class="hidden auth-form" aria-labelledby="loginTitle">
+                <h2 id="loginTitle">Welcome Back</h2>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+                <p style="margin-top: 10px; text-align: center;">
+                    Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
+                </p>
+            </form>
 
-        <h3>Getting Started</h3>
-        <p>To get started with the API, you can make requests to the following endpoints:</p>
-
-        <div class="endpoint">
-            <strong>GET /api/users</strong> - Get all users
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form" aria-labelledby="signupTitle">
+                <h2 id="signupTitle">Join NodeCart</h2>
+                <div class="form-group">
+                    <label for="signupName">Name</label>
+                    <input type="text" id="signupName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPhone">Phone</label>
+                    <input type="tel" id="signupPhone" name="phone" pattern="\d{10}" placeholder="10 digits">
+                </div>
+                <div class="form-group">
+                    <label for="signupAddress">Address</label>
+                    <input type="text" id="signupAddress" name="address">
+                </div>
+                <button type="submit">Sign Up</button>
+                <p style="margin-top: 10px; text-align: center;">
+                    Already have an account? <a href="#" onclick="showLogin()">Login</a>
+                </p>
+            </form>
         </div>
 
-        <div class="endpoint">
-            <strong>POST /api/users/register</strong> - Register a new user
+        <!-- Profile Section -->
+        <div id="profileSection" class="profile-container hidden">
+            <div class="profile-header">
+                <h2>My Profile</h2>
+            </div>
+            <div class="profile-info">
+                <p><strong>Name:</strong> <span id="profileName"></span></p>
+                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+                <p><strong>Phone:</strong> <span id="profilePhone"></span></p>
+                <p><strong>Address:</strong> <span id="profileAddress"></span></p>
+            </div>
+            <form id="updateProfileForm">
+                <h3>Update Profile</h3>
+                <div class="form-group">
+                    <label for="updateName">Name</label>
+                    <input type="text" id="updateName" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="updatePhone">Phone</label>
+                    <input type="tel" id="updatePhone" name="phone" pattern="\d{10}" placeholder="10 digits">
+                </div>
+                <div class="form-group">
+                    <label for="updateAddress">Address</label>
+                    <input type="text" id="updateAddress" name="address">
+                </div>
+                <div class="form-group">
+                    <label for="updateRole">Role</label>
+                    <select id="updateRole" name="role" class="form-select">
+                        <option value="customer">Customer</option>
+                        <option value="seller">Seller</option>
+                    </select>
+                </div>
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
         </div>
 
-        <div class="endpoint">
-            <strong>POST /api/users/login</strong> - User login
-        </div>
-
-        <h3>Installation</h3>
-        <ol>
-            <li>Clone the repository</li>
-            <li>Run <code>npm install</code> to install dependencies</li>
-            <li>Create a <code>.env</code> file and set up your environment variables</li>
-            <li>Run <code>node index.mjs</code> to start the server</li>
-        </ol>
-
-        <h3>Environment Variables</h3>
-        <p>Create a <code>.env</code> file in the root directory with the following variables:</p>
-        <pre>
-PORT=3000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-        </pre>
-    </div>
-
-    <footer style="margin-top: 30px; text-align: center; color: #7f8c8d; font-size: 0.9em;">
-        <p>© 2025 NodeCart API. All rights reserved.</p>
-    </footer>
+        <script src="/app.js"></script>
 </body>
 
 </html>

@@ -6,10 +6,18 @@ import { fileURLToPath } from 'url';
 
 import logger from './middleware/logger.mjs';
 import userRoutes from './routes/userRoutes.mjs';
+import authRoutes from './routes/authRoutes.mjs';
+import productRoutes from './routes/productRoutes.mjs';
 
 // Load environment variables from .env file
 // Which is accessed via process.env
 dotenv.config();
+
+// Make sure to set JWT_SECRET in your .env file
+if (!process.env.JWT_SECRET) {
+    console.error('FATAL ERROR: JWT_SECRET is not defined.');
+    process.exit(1);
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,7 +42,9 @@ app.use(express.json());
 app.use(logger);
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 // Default route - serve index.html
 app.get('/', (req, res) => {
