@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import logger from './middleware/logger.mjs';
 import userRoutes from './routes/userRoutes.mjs';
 import authRoutes from './routes/authRoutes.mjs';
+import productRoutes from './routes/productRoutes.mjs';
 
 // Load environment variables from .env file
 // Which is accessed via process.env
@@ -41,10 +42,9 @@ app.use(express.json());
 app.use(logger);
 
 // Routes
-app.use('/api/users', userRoutes);
-
-// Add auth routes
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 // Default route - serve index.html
 app.get('/', (req, res) => {
