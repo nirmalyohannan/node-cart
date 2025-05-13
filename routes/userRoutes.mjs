@@ -12,7 +12,7 @@ const router = express.Router();
 // @desc    Retrieve current user data
 router.get('/', auth, async (req, res) => {
     try {
-        const userId = req.user.id;
+        const userId = req.user._id;
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -27,7 +27,7 @@ router.get('/', auth, async (req, res) => {
 // @desc    Delete current user
 router.delete('/', auth, async (req, res) => {
     try {
-        const userId = req.user.id;
+        const userId = req.user._id;
         const deletedUser = await User.findByIdAndDelete(userId);
         if (!deletedUser) {
             return res.status(404).json({ error: 'User not found' });
@@ -49,7 +49,7 @@ router.put('/', auth, updateUserValidation, async (req, res) => {
     }
 
     try {
-        const userId = req.user.id;
+        const userId = req.user._id;
         const { name, password, phone, address, role } = req.body;
         const updateData = {};
 

@@ -22,9 +22,15 @@ router.post('/',
         }
 
         try {
+            const { name, description, price, stockQuantity, category, images } = req.body;
             const product = new Product({
-                ...req.body,
-                seller: req.user.id
+                name,
+                description,
+                price,
+                stockQuantity,
+                category,
+                images,
+                seller: req.user._id
             });
 
             await product.save();
@@ -87,7 +93,7 @@ router.put('/',
             }
 
             // Check if user is seller and owns the product or is admin
-            if (req.user.role !== 'admin' && product.seller.toString() !== req.user.id) {
+            if (req.user.role !== 'admin' && product.seller.toString() !== req.user._id) {
                 return res.status(403).json({ error: 'Not authorized to update this product' });
             }
 

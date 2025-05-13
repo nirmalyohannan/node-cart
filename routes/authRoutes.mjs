@@ -41,6 +41,7 @@ router.post('/signup', signupValidation, async (req, res) => {
 
 // @route   POST /api/auth/login
 // @desc    Login user and get token
+// @example { "email": "EMAIL", "password": "password" }
 router.post('/login', loginValidation, async (req, res) => {
     // Check for validation errors
     const errors = validationResult(req);
