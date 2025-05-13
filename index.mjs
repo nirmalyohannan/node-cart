@@ -50,7 +50,21 @@ app.use('/api/products', productRoutes);
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+app.get('/product', (req, res) => {
 
+    res.sendFile(path.join(__dirname, 'public', 'product.html'));
+    // res.redirect('/product');
+  });
+  app.get('/product_update', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'public', 'product_update.html'));
+    // res.redirect('/product');
+  });
+  app.get('/product_list', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'public', 'list_product.html'));
+    // res.redirect('/product');
+  });
 app.listen(PORT, () => {
     console.log('Server is running on port ', PORT);
     console.log(`Server is running at http://localhost:${PORT}`);
