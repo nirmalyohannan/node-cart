@@ -9,6 +9,9 @@ import userRoutes from './routes/userRoutes.mjs';
 import authRoutes from './routes/authRoutes.mjs';
 import productRoutes from './routes/productRoutes.mjs';
 
+import cartRoutes from './routes/cartRoutes.mjs';
+
+
 // Load environment variables from .env file
 // Which is accessed via process.env
 dotenv.config();
@@ -45,6 +48,8 @@ app.use(logger);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
+
 
 // Default route - serve index.html
 app.get('/', (req, res) => {
@@ -63,6 +68,11 @@ app.get('/product', (req, res) => {
   app.get('/product_list', (req, res) => {
 
     res.sendFile(path.join(__dirname, 'public', 'list_product.html'));
+    // res.redirect('/product');
+  });
+  app.get('/cart', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'public', 'cart.html'));
     // res.redirect('/product');
   });
 app.listen(PORT, () => {

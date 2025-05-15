@@ -9,7 +9,8 @@ const API = {
     login: '/api/auth/login',
     signout: '/api/auth/signout',
     profile: '/api/users',
-    addProduct: '/api/products' // Add product endpoint
+    addProduct: '/api/products' ,// Add product endpoint
+    cart: '/api/cart'
 };
 
 // DOM Elements
