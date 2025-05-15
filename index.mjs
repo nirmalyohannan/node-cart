@@ -18,8 +18,8 @@ dotenv.config();
 
 // Make sure to set JWT_SECRET in your .env file
 if (!process.env.JWT_SECRET) {
-    console.error('FATAL ERROR: JWT_SECRET is not defined.');
-    process.exit(1);
+  console.error('FATAL ERROR: JWT_SECRET is not defined.');
+  process.exit(1);
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -29,8 +29,8 @@ const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('✅Connected to MongoDB'))
-    .catch((err) => console.log("❌", err));
+  .then(() => console.log('✅Connected to MongoDB'))
+  .catch((err) => console.log("❌", err));
 
 // Create express app
 const app = express();
@@ -53,19 +53,19 @@ app.use('/api/cart', cartRoutes);
 
 // Default route - serve index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 app.get('/product', (req, res) => {
 
-    res.sendFile(path.join(__dirname, 'public', 'product.html'));
-    // res.redirect('/product');
-  });
-  app.get('/product_update', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'product.html'));
+  // res.redirect('/product');
+});
+app.get('/product_update', (req, res) => {
 
-    res.sendFile(path.join(__dirname, 'public', 'product_update.html'));
-    // res.redirect('/product');
-  });
-  app.get('/product_list', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'product_update.html'));
+  // res.redirect('/product');
+});
+app.get('/product_list', (req, res) => {
 
     res.sendFile(path.join(__dirname, 'public', 'list_product.html'));
     // res.redirect('/product');
@@ -76,6 +76,6 @@ app.get('/product', (req, res) => {
     // res.redirect('/product');
   });
 app.listen(PORT, () => {
-    console.log('Server is running on port ', PORT);
-    console.log(`Server is running at http://localhost:${PORT}`);
+  console.log('Server is running on port ', PORT);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });

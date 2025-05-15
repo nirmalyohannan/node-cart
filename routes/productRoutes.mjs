@@ -5,6 +5,7 @@ import Product from '../models/product.mjs';
 import { productValidation } from '../validators/productValidator.mjs';
 import auth from '../middleware/auth.mjs';
 import checkRole from '../middleware/checkRole.mjs';
+import loadUser from '../middleware/loadUser.mjs';
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ const router = express.Router();
 // @access  Private (Sellers and Admins only)
 router.post('/',
     auth,
+    loadUser,
     checkRole(['seller', 'admin']),
     productValidation,
     async (req, res) => {
@@ -22,14 +24,15 @@ router.post('/',
         }
 
         try {
-            const { name, description, price, stockQuantity, category, images } = req.body;
+            const { name, description, price, brand, stock, category, imageLinks } = req.body;
             const product = new Product({
                 name,
                 description,
                 price,
-                stockQuantity,
+                brand,
+                stock,
                 category,
-                images,
+                imageLinks,
                 seller: req.user._id
             });
 
