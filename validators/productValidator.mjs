@@ -24,7 +24,7 @@ export const productValidation = [
         }),
 
     body('imageLinks')
-        .isArray().withMessage('Image links must be an array')
+        .isArray().bail().withMessage('Image links must be an array')
         .notEmpty().withMessage('At least one image link is required')
         .custom(links => {
             if (!links.every(link => typeof link === 'string' && link.trim().length > 0)) {
