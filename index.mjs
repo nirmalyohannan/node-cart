@@ -10,6 +10,8 @@ import authRoutes from './routes/authRoutes.mjs';
 import productRoutes from './routes/productRoutes.mjs';
 
 import cartRoutes from './routes/cartRoutes.mjs';
+import sellerProductRoutes from './routes/sellerProductRoutes.mjs';
+
 
 
 // Load environment variables from .env file
@@ -49,6 +51,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/products/seller',sellerProductRoutes)
 
 
 // Default route - serve index.html
@@ -57,22 +60,22 @@ app.get('/', (req, res) => {
 });
 app.get('/product', (req, res) => {
 
-  res.sendFile(path.join(__dirname, 'public', 'product.html'));
+  res.sendFile(path.join(__dirname, 'public/pages', 'product.html'));
   // res.redirect('/product');
 });
 app.get('/product_update', (req, res) => {
 
-  res.sendFile(path.join(__dirname, 'public', 'product_update.html'));
+  res.sendFile(path.join(__dirname, 'public/pages', 'seller_products.html'));
   // res.redirect('/product');
 });
 app.get('/product_list', (req, res) => {
 
-    res.sendFile(path.join(__dirname, 'public', 'list_product.html'));
+    res.sendFile(path.join(__dirname, 'public/pages', 'list_product.html'));
     // res.redirect('/product');
   });
   app.get('/cart', (req, res) => {
 
-    res.sendFile(path.join(__dirname, 'public', 'cart.html'));
+    res.sendFile(path.join(__dirname, 'public/pages', 'cart.html'));
     // res.redirect('/product');
   });
 app.listen(PORT, () => {
