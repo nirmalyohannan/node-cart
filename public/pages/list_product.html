@@ -1,59 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Product List</title>
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        header { background-color: #333; color: white; padding: 1em 0; text-align: center; }
+        nav { background-color: #444; padding: 0.5em; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        h1 { text-align: center; color: #333; }
+        #productListContainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .product-card { background-color: white; border: 1px solid #ddd; border-radius: 8px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        .product-card h3 { margin-top: 0; color: #007bff; }
+        .product-card img { max-width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid #eee; margin-bottom: 10px; border-radius: 4px 4px 0 0; }
+        .product-card p { margin: 5px 0; font-size: 0.9em; }
+        .product-card p strong { color: #555; }
+        .product-card em { font-size: 0.8em; color: #777; }
+        .add-to-cart-btn { background-color: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-top: auto; font-size: 0.9em; }
+        .add-to-cart-btn:hover { background-color: #218838; }
+        #errorMessage { color: red; text-align: center; margin-bottom: 15px; font-weight: bold; }
+        .loading-message { text-align: center; font-size: 1.2em; color: #555; padding: 20px; }
+    </style>
 </head>
 <body>
-  <h2>Product List</h2>
+    <header>
+        <h1>Our Products</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/product_list">Products</a>
+        <a href="/cart">My Cart</a>
+        <!-- You can add login/logout links here, potentially managed by app.js -->
+    </nav>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Category</th>
-      </tr>
-    </thead>
-    <tbody id="productTableBody">
-      <!-- rows will be inserted here -->
-    </tbody>
-  </table>
+    <div class="container">
+        <div id="errorMessage"></div>
+        <div id="productListContainer">
+            <p class="loading-message">Loading products, please wait...</p>
+        </div>
+    </div>
 
-  <script>
-    fetch('/products')
-      .then(res => res.json())
-      .then(products => {
-        const tableBody = document.getElementById('productTableBody');
-        products.forEach(product => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${product.name}</td>
-            <td>${product.description}</td>
-            <td>$${product.price.toFixed(2)}</td>
-            <td>${product.stockQuantity}</td>
-            <td>${product.category}</td>
-          `;
-          tableBody.appendChild(row);
-        });
-      });
-  </script>
+    <script src="/js/productList.js"></script>
+    <!-- If you have a global app.js for auth status and nav updates, include it too -->
+    <!-- <script src="/js/app.js"></script> -->
 </body>
 </html>
