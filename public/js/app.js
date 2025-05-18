@@ -1,3 +1,4 @@
+// d:\nodepg\node-cart\public\js\app.js
 // app.js
 
 // Store the JWT token
@@ -51,6 +52,25 @@ function showError(message) {
     elements.successMessage.classList.add('hidden');
 }
 
+// New function for role-based redirection
+function performRoleBasedRedirect(role) {
+    // console.log('Current role for redirection:', role);
+    // console.log('Current pathname:', window.location.pathname);
+
+    if (role === 'seller') {
+        // If current page is not the root or index.html, redirect to root
+        if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+            // console.log('Redirecting seller to /');
+            window.location.href = '/'; // Instructs browser to go to the homepage
+        }
+    } else if (role === 'customer') {
+        // If current page is not /product_list, redirect there
+        if (window.location.pathname !== '/product_list') {
+            // console.log('Redirecting customer to /product_list');
+            window.location.href = '/product_list'; // Instructs browser to go to product list page
+        }
+    }
+}
 // Handle signup
 async function handleSignup(event) {
     event.preventDefault();
@@ -75,9 +95,10 @@ async function handleSignup(event) {
 
         authToken = data.token;
         localStorage.setItem('authToken', authToken);
-        showSuccess('Signup successful!');
+        showSuccess('Signup successful! Redirecting...');
         updateUI();
-        loadProfile();
+        // console.log('Signup successful, role:', data.role);
+        await loadProfile(); // loadProfile will now also handle redirection
     } catch (error) {
         showError(error.message);
     }
@@ -85,6 +106,7 @@ async function handleSignup(event) {
 
 // Handle login
 async function handleLogin(event) {
+    // console.log('Login attempt started');
     event.preventDefault();
     const formData = new FormData(event.target);
 
@@ -104,9 +126,10 @@ async function handleLogin(event) {
 
         authToken = data.token;
         localStorage.setItem('authToken', authToken);
-        showSuccess('Login successful!');
+        showSuccess('Login successful! Redirecting...');
         updateUI();
-        loadProfile();
+        // console.log('Login successful, role:', data.role);
+        await loadProfile();
     } catch (error) {
         showError(error.message);
     }
@@ -134,6 +157,7 @@ async function handleSignout() {
 
 // Load user profile
 async function loadProfile() {
+    // console.log('Attempting to load profile...');
     try {
         const response = await fetch(API.profile, {
             headers: {
@@ -146,13 +170,29 @@ async function loadProfile() {
 
         if (!response.ok) throw new Error(user.error || 'Failed to load profile');
 
+        // console.log('Profile loaded:', user);
+
         // Update profile information
         document.getElementById('profileName').textContent = user.name;
         document.getElementById('profileEmail').textContent = user.email;
         document.getElementById('profilePhone').textContent = user.phone || 'Not provided';
         document.getElementById('profileAddress').textContent = user.address || 'Not provided';
+
+        // Perform redirection after profile is loaded and role is available
+        if (user && user.role) {
+            performRoleBasedRedirect(user.role);
+        }
+
     } catch (error) {
+        console.error('Profile load error:', error);
         showError(error.message);
+        // Consider robust error handling for invalid tokens:
+        // if (error.message.includes('token') || error.message.includes('auth')) { // Or check response status if available
+        //     authToken = null;
+        //     localStorage.removeItem('authToken');
+        //     updateUI();
+        //     showError(`Session may have expired. Please log in again. Error: ${error.message}`);
+        // }
     }
 }
 
